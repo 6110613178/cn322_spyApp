@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <title>Admin Homepage</title>
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-3 text-white" style="margin-top: 102px;">
+            <div class="row p-3">
+                <img style="border-radius: 50%; width: 180px;" src="\..\static\img\rabbit2.jpeg" class="rounded-circle float-start"  alt="avatar">
+            </div>
+            <div class="row">
+                code name : เอกนรวย 
+            </div>
+            <div class="row">
+                ภาระกิจที่สำเร็จ : 1
+            </div>
+            <div class="row">
+                ภารกิจที่ทำอยู่ : 15
+            </div>
+            <div class="row">
+                ภาระกิจที่รอการอนุมัติ : 4
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row p-3">
+                <div class="col p-3">
+                    <button class="btn btn-custom" type="button" id="ButtonAdd">
+                        เพิ่มสายลับ
+                    </button>
+                </div>
+            </div>
+            <table class="table table-dark ">
+                <thead>
+                  <tr>
+                    <th style="width: 5%" scope="col">CODE NAME</th>
+                    <th style="width: 5%" scope="col">สำเร็จ</th>
+                    <th style="width: 5%" scope="col">ดำเนินงาน</th>
+                    <th style="width: 5%" scope="col">รอการอนุมัติ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>Otto</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+<div>
+{% endblock %}

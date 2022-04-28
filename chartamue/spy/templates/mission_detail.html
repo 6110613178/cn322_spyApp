@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <title>Mission Detail</title>
+{% endblock %}
+{% block body %}
+<main class="container bg-warning mt-4" style="min-height: 420px;">
+    <div class="d-flex row m-1">
+        <div class="col-5 mt-3 p-2">
+            <div class="fw-bold">หัวข้อภารกิจ : {{ mission.mission_name }}</div>
+            <div class="fw-bold mt-3">วันที่ปฏิบัติภารกิจ : {{ mission.date_start }}</div>
+            <div class="col mt-3">
+                {% if request.session.role == 'admin' %}
+                <div class="fw-bold">สถานะ เสร็จสิ้น</div>
+                <button type="button" class="btn btn-success mt-1">อนุมัติ</button>
+                <button type="button" class="btn btn-danger mt-1">ปฏิเสธ</button>
+                {% else %}
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">สถานะภารกิจ</button>                   
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <!-- http://localhost:8000/add_spy -->
+                        <li><a class="open-popup dropdown-item" href="#">เสร็จสิ้น</a></li>
+                        <li><a class="open-popup dropdown-item" href="#">ไม่สำเร็จ</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col d-flex justify-content-end  mt-2">
+            <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300">
+            <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300">
+        </div>
+        <section class="card bg-light p-3 mt-3">
+            <div class="class-block">
+                <div class="fw-bold"> รายละเอียด</div>
+                <div>{{ mission.mission_descriptions }}</div>
+            </div>
+        </section>
+    </div>
+    <div id="popup">
+        <div class="fs-5 fw-bold pb-3">ยืนยันสถานะภารกิจ</div>
+        <div class="col">
+            <button type="button" class="btn btn-success mt-1">ยืนยัน</button>
+            <button id="close-popup" type="button" class="btn btn-danger mt-1">ยกเลิก</button>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+{% endblock %}

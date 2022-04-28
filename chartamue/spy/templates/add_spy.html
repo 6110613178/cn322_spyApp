@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <title>Add Spy Page</title>
+{% endblock %}
+{% block body %}
+    <div class="container bg-custom mt-4" style="width:700px; height:490px;">
+        <div class="fs-3 fw-bolder text-center" style="padding-top: 10px;">เพิ่มสายลับ</div>
+        <div class="row">
+            <div class="col-3 p-2">
+                <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300"><br>
+                <button class="btn btn-success mt-1">เลือกรูปภาพ</button>
+            </div>
+            <div class="col-9 p-2">
+                <div class="row p-2">
+                    <div class="fw-bolder fs-5"> CODE NAME</div>
+                    <input type="text" class="form-control"  id="code_name" name="code_name" aria-describedby="code_name">
+                </div>
+                <div class="row p-2">
+                    <div class="fw-bolder fs-5">USERNAME</div>
+                    <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                </div>
+                <div class="row p-2">
+                    <textarea class="form-control" id="mission_detail" name="mission_detail" rows="7"></textarea>
+                </div>
+            </div>
+        <div>
+        <div class="col d-flex justify-content-end">
+            <button class="btn btn-success mt-1">เพิ่มภารกิจ</button>
+        </div>
+
+    </div>
+{% endblock %}
+ <!-- <div class="row m-1">
+            <div class="col-3 p-2">
+                <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300"><br>
+                <button class="btn btn-success mt-1">เลือกรูปภาพ</button>
+            </div>
+            <div class="col-9 p-2">
+                <label class="fw-bold" style="margin-left: 10px;" for="code_name">CODE NAME</label><br>
+                <input class="m-2" type="text" id="code_name" name="code_name"><br>
+                <label class="fw-bold" style="margin-left: 10px;" for="username">USERNAME</label><br>
+                <input class="m-2" type="text" id="username" name="username"><br>
+                <textarea class="m-2" id="mission_detail" name="mission_detail" cols="50" rows="7"></textarea>
+            </div>
+        <div> -->

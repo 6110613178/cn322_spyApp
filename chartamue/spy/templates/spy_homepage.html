@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <title>Spy Homepage</title>
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-3 text-white" style="margin-top: 102px;">
+            <div class="row p-3">
+                <img style="border-radius: 50%; width: 180px; margin: 0 auto;" src="\..\static\img\rabbit2.jpeg" class="rounded-circle float-start"  alt="avatar">
+            </div>
+            <div class="row">
+                code name : เอกนรวย 
+            </div>
+            <div class="row">
+                ภาระกิจที่สำเร็จ : 1
+            </div>
+            <div class="row">
+                ภารกิจที่ทำอยู่ : 15
+            </div>
+            <div class="row">
+                ภาระกิจที่รอการอนุมัติ : 4
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row p-3">
+                <div class="col p-3">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            เลือกสถานะ
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">กำลังดำเนินการ</a></li>
+                          <li><a class="dropdown-item" href="#">เสร็จสิ้น</a></li>
+                          <li><a class="dropdown-item" href="#">ไม่สำเร็จ</a></li>
+                        </ul>
+                      </div>
+                </div>
+            </div>
+            <table class="table table-dark ">
+                <thead>
+                  <tr>
+                    <th style="width: 5%" scope="col">หัวข้อภาระกิจ</th>
+                    <th style="width: 5%" scope="col"> วันที่ปฏิบัติภารกิจ</th>
+                    <th style="width: 5%" scope="col">สถานะ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+<div>
+ </div>
+  
+    
+{% endblock %}
