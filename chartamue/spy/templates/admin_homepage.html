@@ -9,57 +9,56 @@
     <div class="row justify-content-between">
         <div class="col-3 text-white" style="margin-top: 102px;">
             <div class="row p-3">
-                <img style="border-radius: 50%; width: 180px;" src="\..\static\img\rabbit2.jpeg" class="rounded-circle float-start"  alt="avatar">
-            </div>
-            <div class="row">
-                code name : เอกนรวย 
-            </div>
-            <div class="row">
-                ภาระกิจที่สำเร็จ : 1
-            </div>
-            <div class="row">
-                ภารกิจที่ทำอยู่ : 15
-            </div>
-            <div class="row">
-                ภาระกิจที่รอการอนุมัติ : 4
+                <img style="border-radius: 50%; width: 180px;" src="{% static 'img/rabbit2.jpeg' %}" class="rounded-circle float-start"  alt="avatar">
+                <div class="d-flex justify-content-start pt-1">Code Name : {{ request.user.userprofile.code_name }}</div>
+                {% regroup missions|dictsort:"status" by status as mission_list %}
+                {% for group in mission_list %}
+                <div class="d-flex justify-content-start pt-1">{{ group.grouper }} : {{ group.list | length }}</div>
+                {% empty %}
+                <div class="d-flex justify-content-start pt-1">ภารกิจทั้งหมด : 0</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจที่รอการอนุมัติ : 0</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจที่อนุมัติ : 0</div>
+                {% endfor %}     
             </div>
         </div>
         <div class="col-8">
             <div class="row p-3">
-                <div class="col p-3">
-                    <button class="btn btn-custom" type="button" id="ButtonAdd">
+                <div class="col-10 p-3">
+                    <button class="btn btn-custom" type="button" name="add_spy" onclick="location.href = '/add_spy'">
                         เพิ่มสายลับ
                     </button>
                 </div>
+                <div class="col-2 p-3">
+                  <button class="btn btn-custom" type="button" name="add_spy" onclick="location.href = '/add_mission'">
+                      เพิ่มภารกิจ
+                  </button>
+              </div>
             </div>
+            
             <table class="table table-dark ">
                 <thead>
                   <tr>
                     <th style="width: 5%" scope="col">CODE NAME</th>
                     <th style="width: 5%" scope="col">สำเร็จ</th>
-                    <th style="width: 5%" scope="col">ดำเนินงาน</th>
+                    <th style="width: 5%" scope="col">ดำเนินการ</th>
                     <th style="width: 5%" scope="col">รอการอนุมัติ</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody>           
+                  {% for spy in all_spy %}
                   <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
+                    <td><a href="{% url 'SpyProfile' spy.user.id %}">{{ spy.code_name }}</a></td>
+                    <td>{{ spy.complete_mission }}</td>
+                    <td>{{ spy.ongoing_mission }}</td>
+                    <td>{{ spy.waiting_mission }}</td>
+                  {% empty %}
+                    <td>Empty</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>Otto</td>
-                  </tr>
+                  {% endfor %}
+                
                 </tbody>
             </table>
         </div>

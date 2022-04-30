@@ -5,47 +5,88 @@
 {% endblock %}
 {% block body %}
 <main class="container bg-warning mt-4" style="min-height: 420px;">
-    <div class="d-flex row m-1">
-        <div class="col-5 mt-3 p-2">
-            <div class="fw-bold">หัวข้อภารกิจ : {{ mission.mission_name }}</div>
-            <div class="fw-bold mt-3">วันที่ปฏิบัติภารกิจ : {{ mission.date_start }}</div>
-            <div class="col mt-3">
-                {% if request.session.role == 'admin' %}
-                <div class="fw-bold">สถานะ เสร็จสิ้น</div>
-                <button type="button" class="btn btn-success mt-1">อนุมัติ</button>
-                <button type="button" class="btn btn-danger mt-1">ปฏิเสธ</button>
-                {% else %}
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">สถานะภารกิจ</button>                   
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <!-- http://localhost:8000/add_spy -->
-                        <li><a class="open-popup dropdown-item" href="#">เสร็จสิ้น</a></li>
-                        <li><a class="open-popup dropdown-item" href="#">ไม่สำเร็จ</a></li>
-                    </ul>
+    <form action= "/mission_detail/{{ id }}" method="POST">
+        {% csrf_token %}
+        <div class="d-flex row m-1">
+            <div class="col-5 mt-3 p-2">
+                <div class="fw-bold">หัวข้อภารกิจ : {{ mission_name }}</div>
+                <div class="fw-bold mt-3">วันที่ปฏิบัติภารกิจ : {{ date_start }}</div>
+                <div class="col mt-3">
+                    {% if request.session.role == 'Admin' %}
+                        {% if status == 'on going' %}
+                        <div class="fw-bold">สถานะ ยังไม่สำเร็จ</div>
+                        {% elif status == 'waiting' %}
+                        <div class="fw-bold">สถานะ รอการอนุมัติ</div>
+                        <input type="button" onclick="submitComplete()" class="open-popup btn btn-success mt-1" value="อนุมัติ">
+                        <input type="button" onclick="submitOnGoing()" class="open-popup btn btn-danger mt-1" value="ปฏิเสธ">
+                        <input type="hidden" id="status" name="status">
+                        {% elif status == 'complete' %}
+                        <div class="fw-bold">สถานะ สำเร็จ</div>
+                        {% endif %}
+                    {% else %}
+                        {% if status == 'on going' %}
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">ยังไม่สำเร็จ</button>                   
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><input type="button" onclick="submitWaiting()" class="open-popup dropdown-item" value="เสร็จสิ้น"></li>
+                                <li><input type="button" onclick="submitOnGoing()" class="open-popup dropdown-item" value="ยังไม่สำเร็จ"></li>
+                                <input type="hidden" id="status" name="status">
+                            </ul>
+                        </div>
+                        {% elif status == 'waiting' %}
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">รอการอนุมัติ</button>                   
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><input type="button" onclick="submitWaiting()" class="open-popup dropdown-item" value="เสร็จสิ้น"></li>
+                                <li><input type="button" onclick="submitOnGoing()" class="open-popup dropdown-item" value="ยังไม่สำเร็จ"></li>
+                                <input type="hidden" id="status" name="status">
+                            </ul>
+                        </div>
+                        {% elif status == 'complete' %}
+                        <div class="dropdown">
+                            <a class="btn btn-success mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">เสร็จสิ้น</a>                  
+                        </div>
+                        {% endif %}
+                    {% endif %}
                 </div>
-                {% endif %}
+            </div>
+            <div class="col d-flex justify-content-end  mt-2">
+                <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300">
+                <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300">
+            </div>
+            <section class="card bg-light p-3 mt-3">
+                <div class="class-block">
+                    <div class="fw-bold"> รายละเอียด</div>
+                    <div>{{ mission_descriptions }}</div>
+                </div>
+            </section>
+        </div>
+        <div id="popup">
+            <div class="fs-5 fw-bold pb-3">ยืนยันสถานะภารกิจ</div>
+            <div class="col">
+                <input type="submit" class="btn btn-success mt-1" value="ยืนยัน">
+                <button id="close-popup" type="button" class="btn btn-danger mt-1">ยกเลิก</button>
             </div>
         </div>
-        <div class="col d-flex justify-content-end  mt-2">
-            <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300">
-            <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300">
-        </div>
-        <section class="card bg-light p-3 mt-3">
-            <div class="class-block">
-                <div class="fw-bold"> รายละเอียด</div>
-                <div>{{ mission.mission_descriptions }}</div>
-            </div>
-        </section>
-    </div>
-    <div id="popup">
-        <div class="fs-5 fw-bold pb-3">ยืนยันสถานะภารกิจ</div>
-        <div class="col">
-            <button type="button" class="btn btn-success mt-1">ยืนยัน</button>
-            <button id="close-popup" type="button" class="btn btn-danger mt-1">ยกเลิก</button>
-        </div>
-    </div>
+    </form>
 </main>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+<script>
+function submitOnGoing() {
+    var obj = document.getElementById("status"); 
+    obj.value = "on going";
+}
+function submitWaiting() {
+    var obj = document.getElementById("status"); 
+    obj.value = "waiting";
+}
+function submitComplete() {
+    var obj = document.getElementById("status"); 
+    obj.value = "complete";
+} 
+</script>
+
 {% endblock %}

@@ -1,7 +1,11 @@
 $('#close-popup').click(function() {
-    document.getElementById('popup').style.opacity = "0";
+    let popup = document.getElementById('popup');
+    popup.style.opacity = "0";
+    popup.style.zIndex = "-1";
 });
 
 $('.open-popup').click(function() {
-    document.getElementById('popup').style.opacity = "1";
+    let popup = document.getElementById('popup');
+    popup.style.opacity = "1";
+    popup.style.zIndex = "1";
 });

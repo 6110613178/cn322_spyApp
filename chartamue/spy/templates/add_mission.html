@@ -4,39 +4,32 @@
 <title>Add Mission Page</title>
 {% endblock %}
 {% block body %}
-<div class="container bg-custom mt-4" style="width:700px; height:450px;">
+<div class="container bg-custom mt-4" style="width:700px; height:470px;">
     <!-- เริ่มต้น height 400px-->
-    <div class="row p-2">
-        <div class="col-3 fs-5 p-2"> หัวข้อภารกิจ</div>
-        <div class="col-9">
-            <input type="text" class="form-control" id="mission_title" name="mission_title">
-        </div>
-        <div>
+    <form method="post" action="/add_mission">
+        {% csrf_token %}
+        <div class="row p-2">
+            <div class="col-3 fs-5 p-2"> หัวข้อภารกิจ</div>
+            <div class="col-9">
+                <input type="text" class="form-control" id="mission_title" name="mission_title">
+            </div>
 
             <div class="row">
                 <div class="col-3 fs-5 p-2">Spy ผู้ทำภารกิจ</div>
                 <div class="col-9">
                     <select class="form-select" id="spy_mission_owner" name="spy_mission_owner">
-                        <option value="spy1">ลูกน้องเอกนรวย1</option>
-                        <option value="spy2">ลูกน้องเอกนรวย2</option>
-                        <option value="spy3">ลูกน้องเอกนรวย3</option>
+                        {% for spy in all_spy %}
+                        <option value="{{ spy.id }}">{{spy.code_name}}</option>
+                        {% endfor %}
                     </select><br>
                 </div>
             </div>
 
             <div class="row">
-                <div class='col-sm-3'>Date</div>
+                <div class="col-3 fs-5 p-2">วันที่ทำภารกิจ :</div>
                 <div class="col-9">
-                    <div class="input-group date" id="datepicker">
-                        <input type="text" class="form-control">
-                        <span class="input-group-append">
-                            <span class="input-group-text bg-white">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                        </span>
-                    </div>
+                    <input type="date" id="dateMission" name="dateMission">
                 </div>
-
             </div>
 
             <div class="row">
@@ -52,16 +45,11 @@
             <div class="col d-flex justify-content-end">
                 <button class="btn btn-success mt-1">เพิ่มภารกิจ</button>
             </div>
-
         </div>
-        <script type="text/javascript">
-            $(function() {
-                $('#datepicker').datepicker();
-            });
-        </script>
-  
-        {% endblock %}
-        <!-- <input class="m-2" type="text" id="mission_title" name="mission_title"><br>
+    </form>
+</div>
+{% endblock %}
+<!-- <input class="m-2" type="text" id="mission_title" name="mission_title"><br>
                 <select class="m-2" id="spy_mission_owner" name="spy_mission_owner">
                     <option value="spy1">ลูกน้องเอกนรวย1</option>
                     <option value="spy2">ลูกน้องเอกนรวย2</option>
@@ -69,6 +57,6 @@
                 </select><br>
                 <textarea class="m-2" id="mission_detail" name="mission_detail" cols="50" rows="7"></textarea> -->
 
-        <!-- <label class="fw-bold m-2" for="mission_title">หัวข้อภารกิจ</label><br>
+<!-- <label class="fw-bold m-2" for="mission_title">หัวข้อภารกิจ</label><br>
                 <label class="fw-bold m-2" for="spy_mission_owner">Spy ผู้ทำภารกิจ</label><br>
                 <label class="fw-bold m-2" for="mission_detail">รายละเอียดภารกิจ</label><br> -->

@@ -8,4 +8,6 @@ def generateKey():
     print(privkey.p)
     print(privkey.q)
     return privkey.n,privkey.e,privkey.d,privkey.p,privkey.q
-generateKey()
+
+
+

@@ -6,6 +6,8 @@
 {% block body %}
     <div class="container bg-custom mt-4" style="width:700px; height:490px;">
         <div class="fs-3 fw-bolder text-center" style="padding-top: 10px;">เพิ่มสายลับ</div>
+    <form action= "{% url 'add_spy' %}" method="post">
+        {% csrf_token %}
         <div class="row">
             <div class="col-3 p-2">
                 <img class="img-thumbnail m-1" src="{% static 'img/image-temp.png' %}" width="150" height="300"><br>
@@ -20,14 +22,12 @@
                     <div class="fw-bolder fs-5">USERNAME</div>
                     <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
                 </div>
-                <div class="row p-2">
-                    <textarea class="form-control" id="mission_detail" name="mission_detail" rows="7"></textarea>
-                </div>
             </div>
         <div>
         <div class="col d-flex justify-content-end">
-            <button class="btn btn-success mt-1">เพิ่มภารกิจ</button>
+            <button class="btn btn-success mt-1">เพิ่มสายลับ</button>
         </div>
+    </form>
 
     </div>
 {% endblock %}

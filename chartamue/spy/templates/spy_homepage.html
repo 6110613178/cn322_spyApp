@@ -9,19 +9,11 @@
     <div class="row justify-content-between">
         <div class="col-3 text-white" style="margin-top: 102px;">
             <div class="row p-3">
-                <img style="border-radius: 50%; width: 180px; margin: 0 auto;" src="\..\static\img\rabbit2.jpeg" class="rounded-circle float-start"  alt="avatar">
-            </div>
-            <div class="row">
-                code name : เอกนรวย 
-            </div>
-            <div class="row">
-                ภาระกิจที่สำเร็จ : 1
-            </div>
-            <div class="row">
-                ภารกิจที่ทำอยู่ : 15
-            </div>
-            <div class="row">
-                ภาระกิจที่รอการอนุมัติ : 4
+              <img style="border-radius: 50%; width: 180px;" src="{% static 'img/rabbit2.jpeg' %}" class="rounded-circle float-start"  alt="avatar">
+                <div class="d-flex justify-content-start pt-1">code name : {{ request.user.userprofile.code_name }}</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจทั้งหมด : {{ tot}}</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจที่รอการอนุมัติ : {{ request.user.userprofile.ongoing_mission}}</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจที่อนุมัติ : {{ request.user.userprofile.waiting }}</div>
             </div>
         </div>
         <div class="col-8">
@@ -48,21 +40,17 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for mission in missions %}
                   <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
+                    <td><a href="{% url 'mission' mission.id %}">{{ mission.mission_name }}</a></td>
+                    <td>{{ mission.date_start }}</td>
+                    <td>{{ mission.status }}</td>
+                    {% empty %}
+                    <td>Empty</td>
+                    <td>Empty</td>
+                    <td>Empty</td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
             </table>
         </div>
