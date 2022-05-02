@@ -11,24 +11,16 @@
             <div class="row p-3">
               <img style="border-radius: 50%; width: 180px;" src="{% static 'img/rabbit2.jpeg' %}" class="rounded-circle float-start"  alt="avatar">
                 <div class="d-flex justify-content-start pt-1">code name : {{ request.user.userprofile.code_name }}</div>
-                <div class="d-flex justify-content-start pt-1">ภารกิจทั้งหมด : {{ tot}}</div>
-                <div class="d-flex justify-content-start pt-1">ภารกิจที่รอการอนุมัติ : {{ request.user.userprofile.ongoing_mission}}</div>
-                <div class="d-flex justify-content-start pt-1">ภารกิจที่อนุมัติ : {{ request.user.userprofile.waiting }}</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจทั้งหมด : {{ total }}</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจที่กำลังทำ : {{ request.user.userprofile.ongoing_mission}}</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจที่รอการอนุมัติ : {{ request.user.userprofile.waiting_mission}}</div>
+                <div class="d-flex justify-content-start pt-1">ภารกิจที่อนุมัติ : {{ request.user.userprofile.complete_mission }}</div>
             </div>
         </div>
         <div class="col-8">
             <div class="row p-3">
                 <div class="col p-3">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            เลือกสถานะ
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" href="#">กำลังดำเนินการ</a></li>
-                          <li><a class="dropdown-item" href="#">เสร็จสิ้น</a></li>
-                          <li><a class="dropdown-item" href="#">ไม่สำเร็จ</a></li>
-                        </ul>
-                      </div>
+                    
                 </div>
             </div>
             <table class="table table-dark ">
